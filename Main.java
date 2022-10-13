@@ -5,26 +5,27 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-       /*
-       Bit manipulation:
-       2. find the two non-repeating element in an array
-       where every element repeats twice
-        */
 
-      int n = 14 ;
-      int count = 0 ;
+    /*
+    Bit manipulation: reverse bit
+     */
 
-      while (n != 0 ){
-          count++ ;
-          n = (n & (n-1)) ;
-      }
-        System.out.println(count);
+        long n = 3 ;
+        long result = 0 ;
+        for(int i = 1 ; i <= 32 ; i++){
+            long lsb = n & 1 ;
+            long reveserLSB = lsb << (32 - i) ;
+            result =  result | reveserLSB ;
+            n = n >> 1 ;
+        }
+        System.out.println(result);
 
     }
+
 }
 
 /*
-OUTPUT: [7,9]
+OUTPUT: 3221225472
 TN: O(n)
 SC: O(1)
  */

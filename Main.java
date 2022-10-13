@@ -9,23 +9,20 @@ public class Main {
        where every element repeats twice
         */
 
-        // approach 1:
+        // approach 2:
         int a[] = {5,4,1,4,3,5,1} ;
+        int result = 0 ;
 
-        Set<Integer> s = new HashSet<>() ;
-        for(int i = 0; i< a.length; i++){
-            if(!s.contains(a[i])){
-                s.add(a[i]) ;
-            }else {
-                s.remove(a[i]) ;
-            }
-        }
-        System.out.println(s);
+       for(int i = 0 ; i < a.length; i++){
+           result = result ^ a[i] ;
+       }
+        System.out.println(result);
+
     }
 }
 
 /*
 OUTPUT: 3
 TN: O(n)
-SC: O(n)
+SC: O(1)
  */

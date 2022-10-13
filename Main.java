@@ -11,27 +11,14 @@ public class Main {
        where every element repeats twice
         */
 
-        // approach 1:
-        int a[] = {2, 4, 7, 9, 2, 4} ;
+      int n = 14 ;
+      int count = 0 ;
 
-        int result = 0 ;
-        for(int i=0; i<a.length ; i++){
-            result = result ^ a[i] ;
-        }
-        // find right most set bit
-        result = (result & -result) ;
-        System.out.println(result);
-
-        int sum1 = 0 ;
-        int sum2 = 0 ;
-        for (int i = 0; i< a.length; i++){
-            if((a[i]&result)>0){
-                sum1 = sum1 ^ a[i] ;
-            }else {
-                sum2 = sum2 ^ a[i] ;
-            }
-        }
-        System.out.println(sum1 + " " + sum2);
+      while (n != 0 ){
+          count++ ;
+          n = (n & (n-1)) ;
+      }
+        System.out.println(count);
 
     }
 }

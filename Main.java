@@ -10,18 +10,28 @@ public class Main {
     Bit manipulation: Divide Integer without using mul, div, mod operator
      */
 
-       int divisor = 8 ;
-       int dividend = 43 ;
-
-       int count = 0 ;
-       while(dividend >= divisor){
-           dividend = dividend - divisor ;
-           count++ ;
-       }
-        System.out.println(count);
-
     }
 
+    public static long divide(long dividend, long divisor){
+        long sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1 ;
+
+        // remove the sign of the operand
+        dividend = Math.abs(dividend) ;
+        divisor = Math.abs(divisor) ;
+
+        // initialize the quotient
+        long q = 0, temp = 0 ;
+        for(int i = 31 ; i >= 0 ; i--){
+            if(temp + (divisor << i) <= dividend){
+                temp = temp + divisor << i ;
+                q |= 1L << i;
+            }
+        }
+        if(sign == -1){
+            q =-q ;
+        }
+        return q ;
+    }
 }
 
 /*

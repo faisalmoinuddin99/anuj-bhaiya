@@ -1,49 +1,26 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
+        /*
+        Sort Integers by The Number of 1 Bits
+         */
+        int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
-    /*
-    Bit manipulation: count the number of miss matching bits
-     */
-        ArrayList<Integer> arr = new ArrayList<>() ;
-        arr.add(1) ;
-        arr.add(3) ;
-        arr.add(5) ;
+        Integer[] wrapperArray = Arrays.stream(a).boxed().toArray(Integer[]::new);
+        Arrays.sort(wrapperArray, (x, b) -> Integer.bitCount(x) == Integer.bitCount(b) ? x - b :
+                Integer.bitCount(x) - Integer.bitCount(b)
+        );
 
-      int result = cntBits(arr) ;
-        System.out.println(result);
-    }
-    public static int missMatchingBits(int a, int b){
-        int n ;
-        int count = 0 ;
-        n = a ^ b ;
-        while (n != 0 ){
-            n = (n & (n-1)) ;
-            count ++ ;
+        int p[] = Arrays.stream(wrapperArray).mapToInt(Integer::intValue).toArray() ;
+        for(int i = 0; i<p.length; i++){
+            System.out.println(p[i]);
         }
-        return count ;
+
+
     }
-
-
-    public static int cntBits(ArrayList<Integer> A) {
-        List<Integer> arrayLists = new ArrayList<>() ;
-        for(int i = 0 ; i < A.size(); i++) {
-            for(int j = 0 ; j < A.size(); j++){
-//                System.out.println("f("+A.get(i) +","+A.get(j)+")");
-                arrayLists.add(missMatchingBits(A.get(i),A.get(j))) ;
-            }
-        }
-        int sum = arrayLists.stream().reduce(0,((integer1, integer2) -> integer1 + integer2 )) ;
-//        System.out.println(sum);
-        return sum ;
-    }
-
-
 }
-
-/*
-OUTPUT: 5
-
- */

@@ -7,25 +7,24 @@ public class Main {
     public static void main(String[] args) {
 
     /*
-    Bit manipulation: reverse bit
+    Bit manipulation: Divide Integer without using mul, div, mod operator
      */
 
-        long n = 3 ;
-        long result = 0 ;
-        for(int i = 1 ; i <= 32 ; i++){
-            long lsb = n & 1 ;
-            long reveserLSB = lsb << (32 - i) ;
-            result =  result | reveserLSB ;
-            n = n >> 1 ;
-        }
-        System.out.println(result);
+       int divisor = 8 ;
+       int dividend = 43 ;
+
+       int count = 0 ;
+       while(dividend >= divisor){
+           dividend = dividend - divisor ;
+           count++ ;
+       }
+        System.out.println(count);
 
     }
 
 }
 
 /*
-OUTPUT: 3221225472
-TN: O(n)
-SC: O(1)
+OUTPUT: 5
+
  */

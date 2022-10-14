@@ -1,37 +1,46 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
 
     /*
-    Bit manipulation: Divide Integer without using mul, div, mod operator
+    Bit manipulation: count the number of miss matching bits
      */
+        ArrayList<Integer> arr = new ArrayList<>() ;
+        arr.add(1) ;
+        arr.add(3) ;
+        arr.add(5) ;
 
+      int result = cntBits(arr) ;
+        System.out.println(result);
+    }
+    public static int missMatchingBits(int a, int b){
+        int n ;
+        int count = 0 ;
+        n = a ^ b ;
+        while (n != 0 ){
+            n = (n & (n-1)) ;
+            count ++ ;
+        }
+        return count ;
     }
 
-    public static long divide(long dividend, long divisor){
-        long sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1 ;
 
-        // remove the sign of the operand
-        dividend = Math.abs(dividend) ;
-        divisor = Math.abs(divisor) ;
-
-        // initialize the quotient
-        long q = 0, temp = 0 ;
-        for(int i = 31 ; i >= 0 ; i--){
-            if(temp + (divisor << i) <= dividend){
-                temp = temp + divisor << i ;
-                q |= 1L << i;
+    public static int cntBits(ArrayList<Integer> A) {
+        List<Integer> arrayLists = new ArrayList<>() ;
+        for(int i = 0 ; i < A.size(); i++) {
+            for(int j = 0 ; j < A.size(); j++){
+//                System.out.println("f("+A.get(i) +","+A.get(j)+")");
+                arrayLists.add(missMatchingBits(A.get(i),A.get(j))) ;
             }
         }
-        if(sign == -1){
-            q =-q ;
-        }
-        return q ;
+        int sum = arrayLists.stream().reduce(0,((integer1, integer2) -> integer1 + integer2 )) ;
+//        System.out.println(sum);
+        return sum ;
     }
+
+
 }
 
 /*

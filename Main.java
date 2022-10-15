@@ -8,15 +8,24 @@ public class Main {
     // Mathmatics algorithm
 
         /*
-        Factorial Trailing Zeros
+        Palindrom Number
          */
 
-       int n = 100 ;
-       int result = 0 ;
-       for(int i = 5; i <= n; i = i * 5){
-           result += n / i ;
-       }
-        System.out.println(result);
+      int n = 125 ;
+      int lastDigit = 0;
+      int reverse = 0 ;
+        int temp = n ;
+      while(n != 0){
+          lastDigit = n % 10 ;
+          reverse = reverse * 10 + lastDigit ;
+          n = n / 10 ;
+      }
+      if(temp == reverse){
+          System.out.println("Palindrom");
+      }else {
+          System.out.println("Not a Palindrom");
+      }
+
     }
 }
 

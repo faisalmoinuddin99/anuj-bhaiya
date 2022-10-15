@@ -8,15 +8,18 @@ public class Main {
     // Mathmatics algorithm
 
         /*
-        Factorial
+        Factorial Trailing Zeros
          */
 
-        int n = 5 ;
-        int fact = 1 ;
-        while(n != 0){
-            fact = fact * n ;
-            n = n - 1 ;
-        }
-        System.out.println(fact);
+       int n = 100 ;
+       int result = 0 ;
+       for(int i = 5; i <= n; i = i * 5){
+           result += n / i ;
+       }
+        System.out.println(result);
     }
 }
+
+/*
+OUTPUT: 24
+ */

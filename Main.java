@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -6,36 +5,41 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        // Mathematics algorithm
-
+        int[] a = {1,2,5,4,7,8,11,20};
         /*
-            sieve of eratosthenes: Is used to find prime no from 2 to n
+        Problem statement: sort the number by even odd
+        o/p: {2,4,8,20,1,5,7,11}
          */
-        int n = 50 ;
-        boolean result [] = sieveOfEratosthenes(n) ;
-        for(int i = 0; i < n ;i++){
-           if(result[i]){
-               System.out.print(i + " ");
-           }
-        }
-
+        sortByEvenOdd(a);
     }
-    public static boolean[] sieveOfEratosthenes(int n){
-        boolean isPrime[] = new boolean[n+1] ;
-        Arrays.fill(isPrime, true);
-        isPrime[0] = false ;
-        isPrime[1] = false ;
-        for(int i = 2; i*i <= n ; i++){
+    public static void sortByEvenOdd(int[] a){
 
-            for(int j = 2 * i; j <= n ; j += i){
-//                System.out.print(j + " ");
-                isPrime[j] = false ;
+        int myArr[] = new int[a.length] ;
+        int index = 0 ;
+        // even
+        for(int i = 0 ; i < a.length; i++){
+            if((a[i] & 1) == 0){
+                myArr[index] = a[i] ;
+                index++ ;
+            }
+
+        }
+        // odd
+        for(int i = 0; i < a.length; i++){
+            if ((a[i]& 1) != 0){
+                myArr[index] = a[i];
+                index++ ;
             }
         }
-        return isPrime ;
+
+        for (int i : myArr){
+            System.out.print(i + " ");
+        }
+
+
+
     }
 }
-
 /*
-OUTPUT: Prime no from 2 to 50 : 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47
+OUTPUT: 2 4 8 20 1 5 7 11
  */

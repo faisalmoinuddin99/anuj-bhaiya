@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -5,41 +7,26 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] a = {1,2,5,4,7,8,11,20};
-        /*
-        Problem statement: sort the number by even odd
-        o/p: {2,4,8,20,1,5,7,11}
-         */
-        sortByEvenOdd(a);
+        int n = 198 ;
+        long result = reverse(n) ;
+        System.out.println(result);
     }
-    public static void sortByEvenOdd(int[] a){
-
-        int myArr[] = new int[a.length] ;
-        int index = 0 ;
-        // even
-        for(int i = 0 ; i < a.length; i++){
-            if((a[i] & 1) == 0){
-                myArr[index] = a[i] ;
-                index++ ;
-            }
-
+    public static long reverse(int n){
+        int lastDigit = 0 ;
+        boolean isNegative = n < 0 ;
+        long  ans = 0;
+        n = Math.abs(n) ;
+        while(n != 0){
+            lastDigit = n % 10 ;
+            ans = ans * 10 + lastDigit ;
+            n = n / 10 ;
         }
-        // odd
-        for(int i = 0; i < a.length; i++){
-            if ((a[i]& 1) != 0){
-                myArr[index] = a[i];
-                index++ ;
-            }
-        }
+        if (ans > Integer.MAX_VALUE) return 0 ;
+        if (isNegative) return -(int) ans ;
 
-        for (int i : myArr){
-            System.out.print(i + " ");
-        }
-
-
-
+        return (int) ans ;
     }
 }
 /*
-OUTPUT: 2 4 8 20 1 5 7 11
+OUTPUT: -891
  */

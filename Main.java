@@ -24,6 +24,14 @@ public class Main {
         int p2 = n | maskForTurnOn ;
         System.out.println(p2);
 
+        // 3. Check if kth bit is set for a number
 
+        int maskCKB = 1 << (kthBit - 1) ;
+        int p3 = n & maskCKB ;
+        if(p3 != 0){
+          System.out.println(kthBit + " is set") ;
+        }else{
+          System.out.println(kthBit + " is not set");
+        }
     }
 }

@@ -7,26 +7,44 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        int n = 198 ;
-        long result = reverse(n) ;
-        System.out.println(result);
-    }
-    public static long reverse(int n){
-        int lastDigit = 0 ;
-        boolean isNegative = n < 0 ;
-        long  ans = 0;
-        n = Math.abs(n) ;
-        while(n != 0){
-            lastDigit = n % 10 ;
-            ans = ans * 10 + lastDigit ;
-            n = n / 10 ;
-        }
-        if (ans > Integer.MAX_VALUE) return 0 ;
-        if (isNegative) return -(int) ans ;
+     /*
+     Given n, print the xor of all no b/w 1 to n
 
-        return (int) ans ;
+     i/p: n = 5
+
+     1 ^ 2 ^ 3 ^ 4 ^ 5
+      */
+
+        // Naive approach
+        int n = 100 ;
+        int xor = 0 ;
+        for(int i = 1; i <= n; i++){
+            xor = xor ^ i ;
+        }
+        System.out.println(xor); // TC: O(n)
+
+        int ans = findXor(n) ;
+        System.out.println(ans); // TC: O(1)
+
+
+    }
+    // using bit manipulation approach
+    public static int findXor(int n){
+
+        int mod = n % 4 ;
+
+        if(mod == 0){
+            return n ;
+        }
+        else if(mod == 1){
+            return 1 ;
+        }
+        else if(mod == 2){
+            return  n + 1 ;
+        }
+        else if(mod == 3){
+            return 0 ;
+        }
+        return 1 ;
     }
 }
-/*
-OUTPUT: -891
- */

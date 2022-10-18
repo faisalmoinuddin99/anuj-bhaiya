@@ -12,16 +12,14 @@ public class Main {
             Playing with rightmost set bits of a number
          */
 
-        // 2.  Find the position of the rightmost set bit
-        int n = 20 ;
+        // 3.  Computing parity of a number -> Parity means no. of set bits
+        int n = 15 ;
         int cnt = 0 ;
 
-        while(n != 0) {
-            if((n & 1) == 1){
-                break ;
-            }
-            n = n >> 1 ;
-            cnt++ ;
+        while (n != 0){
+
+            n = n & n-1 ;
+            cnt++;
         }
         System.out.println(cnt);
     }

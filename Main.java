@@ -11,28 +11,11 @@ public class Main {
             Important Properties:
          */
 
-        // 1. check if ith bit is set or not
-       int n = 6 ;
-       int i = 1 ;
-
-       if((n & (1<<i)) != 0){
-           System.out.println("bit is set");
-       }else{
-           System.out.println("bit is not set");
-       }
-
-       // detect two integer have opposite signs or not
-
-        int x = -4 ;
-       int y = 8 ;
-
-       boolean isOppositeSign = (x ^ y) < 0 ;
-       if(isOppositeSign){
-           System.out.println("signs are differ");
-       }else{
-           System.out.println("both are positive");
-       }
-
-
+        // 1. Turn off the kth bit of a number
+      int n = 13 ;
+      int kthBit = 3 ;
+      int mask = ~ (1<< (kthBit - 1 ) ) ;
+      int ans = n & mask ;
+        System.out.println(ans);
     }
 }

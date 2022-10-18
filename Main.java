@@ -13,7 +13,7 @@ public class Main {
 
         // 1. Turn off the kth bit of a number
       int n = 20 ;
-      int kthBit = 4 ;
+      int kthBit = 3 ;
       int maskForTurnOff = ~ (1<< (kthBit - 1 ) ) ;
       int p1 = n & maskForTurnOff ;
         System.out.println(p1);
@@ -33,5 +33,10 @@ public class Main {
         }else{
           System.out.println(kthBit + " is not set");
         }
+
+        // 4. Toggle the kth bit
+      int maskTKB = 1 << (kthBit - 1) ;
+        int p4 = n ^ maskTKB ;
+      System.out.println(p4);
     }
 }

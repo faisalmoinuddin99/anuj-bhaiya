@@ -8,25 +8,17 @@ import static java.util.Arrays.stream;
 public class Main {
     public static void main(String[] args) {
      /*
-     Given n, print the xor of all no b/w 1 to n
+        Given a range (L-R) print all the xor b/w the range L to R
 
-     i/p: n = 5
-
-     1 ^ 2 ^ 3 ^ 4 ^ 5
+        i/p: L = 2, R = 4
+        2 ^ 3 ^ 4 = 5
       */
-
-        // Naive approach
-        int n = 100 ;
-        int xor = 0 ;
-        for(int i = 1; i <= n; i++){
-            xor = xor ^ i ;
-        }
-        System.out.println(xor); // TC: O(n)
-
-        int ans = findXor(n) ;
+        int l = 7, r = 5 ;
+        int ans = findXor(l,r) ;
         System.out.println(ans); // TC: O(1)
-
-
+    }
+    public static int findXor(int l, int r) {
+        return (findXor(l-1) ^ findXor(r)) ;
     }
     // using bit manipulation approach
     public static int findXor(int n){

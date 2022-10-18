@@ -12,10 +12,18 @@ public class Main {
          */
 
         // 1. Turn off the kth bit of a number
-      int n = 13 ;
-      int kthBit = 3 ;
-      int mask = ~ (1<< (kthBit - 1 ) ) ;
-      int ans = n & mask ;
-        System.out.println(ans);
+      int n = 20 ;
+      int kthBit = 4 ;
+      int maskForTurnOff = ~ (1<< (kthBit - 1 ) ) ;
+      int p1 = n & maskForTurnOff ;
+        System.out.println(p1);
+
+        // 2. Turn on the kth bit of a number
+
+        int maskForTurnOn = 1<< (kthBit - 1) ;
+        int p2 = n | maskForTurnOn ;
+        System.out.println(p2);
+
+
     }
 }

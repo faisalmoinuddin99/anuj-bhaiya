@@ -7,36 +7,32 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-     /*
-        Given a range (L-R) print all the xor b/w the range L to R
+        /*
+            Important Properties:
+         */
 
-        i/p: L = 2, R = 4
-        2 ^ 3 ^ 4 = 5
-      */
-        int l = 7, r = 5 ;
-        int ans = findXor(l,r) ;
-        System.out.println(ans); // TC: O(1)
-    }
-    public static int findXor(int l, int r) {
-        return (findXor(l-1) ^ findXor(r)) ;
-    }
-    // using bit manipulation approach
-    public static int findXor(int n){
+        // 1. check if ith bit is set or not
+       int n = 6 ;
+       int i = 1 ;
 
-        int mod = n % 4 ;
+       if((n & (1<<i)) != 0){
+           System.out.println("bit is set");
+       }else{
+           System.out.println("bit is not set");
+       }
 
-        if(mod == 0){
-            return n ;
-        }
-        else if(mod == 1){
-            return 1 ;
-        }
-        else if(mod == 2){
-            return  n + 1 ;
-        }
-        else if(mod == 3){
-            return 0 ;
-        }
-        return 1 ;
+       // detect two integer have opposite signs or not
+
+        int x = -4 ;
+       int y = 8 ;
+
+       boolean isOppositeSign = (x ^ y) < 0 ;
+       if(isOppositeSign){
+           System.out.println("signs are differ");
+       }else{
+           System.out.println("both are positive");
+       }
+
+
     }
 }

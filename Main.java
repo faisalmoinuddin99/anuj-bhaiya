@@ -15,11 +15,24 @@ public class Main {
         // Trick 1. Convert uppercase character to lowercase
         char ch = 'n' ;
         char lowerCh = upperToLower(ch) ;
-        System.out.println(lowerCh);
+        char upperCh = lowerToUpper(ch) ;
+        System.out.println("Converted from upper to lower: "+lowerCh);
+        System.out.println("Converted from lower to upper: "+upperCh);
     }
     public static char upperToLower(char ch){
         int ans = ch | ' ' ;
 
         return (char) ans ;
      }
+    // Trick 2. Convert lowercase character to uppercase
+
+    public static char lowerToUpper(char ch){
+        int ans = ch & '_' ;
+
+        return (char) ans ;
+    }
 }
+/*
+Converted from upper to lower: n
+Converted from lower to upper: N
+ */

@@ -12,16 +12,17 @@ public class Main {
             Playing with rightmost set bits of a number
          */
 
-       // 1.  Check if a positive integer is a power of 2 without using any branching or loop.
-        int n = 31 ;
-        boolean ans = isPowerOf2(n) ;
-        if(ans){
-            System.out.println("Yes");
-        }else{
-            System.out.println("No");
+        // 2.  Find the position of the rightmost set bit
+        int n = 20 ;
+        int cnt = 0 ;
+
+        while(n != 0) {
+            if((n & 1) == 1){
+                break ;
+            }
+            n = n >> 1 ;
+            cnt++ ;
         }
-    }
-    public static boolean isPowerOf2(int n){
-        return (n != 0) && (n &(n-1)) == 0 ;
+        System.out.println(cnt);
     }
 }

@@ -9,18 +9,17 @@ public class Main {
     public static void main(String[] args) {
         /*
             Important Properties:
-            Playing with rightmost set bits of a number
+            Bit Hacks — Part 4 (Playing with letters of the English alphabet)
          */
 
-        // Brian Kernighan’s Algorithm to count set bits in an integer
-        int n = -1 ;
-        int cnt = 0 ;
-
-        while (n != 0){
-
-            n = n & n-1 ;
-            cnt++;
-        }
-        System.out.println(cnt); // 32
+        // Trick 1. Convert uppercase character to lowercase
+        char ch = 'n' ;
+        char lowerCh = upperToLower(ch) ;
+        System.out.println(lowerCh);
     }
+    public static char upperToLower(char ch){
+        int ans = ch | ' ' ;
+
+        return (char) ans ;
+     }
 }

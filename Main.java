@@ -9,34 +9,19 @@ public class Main {
     public static void main(String[] args) {
         /*
             Important Properties:
+            Playing with rightmost set bits of a number
          */
 
-        // 1. Turn off the kth bit of a number
-      int n = 20 ;
-      int kthBit = 3 ;
-      int maskForTurnOff = ~ (1<< (kthBit - 1 ) ) ;
-      int p1 = n & maskForTurnOff ;
-        System.out.println(p1);
-
-        // 2. Turn on the kth bit of a number
-
-        int maskForTurnOn = 1<< (kthBit - 1) ;
-        int p2 = n | maskForTurnOn ;
-        System.out.println(p2);
-
-        // 3. Check if kth bit is set for a number
-
-        int maskCKB = 1 << (kthBit - 1) ;
-        int p3 = n & maskCKB ;
-        if(p3 != 0){
-          System.out.println(kthBit + " is set") ;
+       // 1.  Check if a positive integer is a power of 2 without using any branching or loop.
+        int n = 31 ;
+        boolean ans = isPowerOf2(n) ;
+        if(ans){
+            System.out.println("Yes");
         }else{
-          System.out.println(kthBit + " is not set");
+            System.out.println("No");
         }
-
-        // 4. Toggle the kth bit
-      int maskTKB = 1 << (kthBit - 1) ;
-        int p4 = n ^ maskTKB ;
-      System.out.println(p4);
+    }
+    public static boolean isPowerOf2(int n){
+        return (n != 0) && (n &(n-1)) == 0 ;
     }
 }

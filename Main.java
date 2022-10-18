@@ -13,15 +13,18 @@ public class Main {
          */
 
         //  1. Convert uppercase character to lowercase
-        char ch = 'j' ;
+        char ch = 'd' ;
         System.out.println("Input from use: " + ch);
         char lowerCh = upperToLower(ch) ;
         char upperCh = lowerToUpper(ch) ;
         System.out.println("Converted from upper to lower: "+lowerCh);
         System.out.println("Converted from lower to upper: "+upperCh);
 
-        char invertAplha = invertAlphabet(ch) ;
-        System.out.println("Invert the alphabet: "+invertAplha);
+        char invertAlpha = invertAlphabet(ch) ;
+        System.out.println("Invert the alphabet: "+ invertAlpha);
+
+        int positionOfAlpha = positionOfAlphabet(ch) ;
+        System.out.println("Position: " + positionOfAlpha);
     }
     public static char upperToLower(char ch){
         int ans = ch | ' ' ;
@@ -40,6 +43,12 @@ public class Main {
     public static char invertAlphabet(char ch){
         int ans = ch ^ ' ' ;
         return (char) ans ;
+    }
+
+    // 4. Find a letter’s position in alphabet
+    public static int positionOfAlphabet(char ch){
+        int position = ch & 31 ;
+        return position ;
     }
 }
 /*

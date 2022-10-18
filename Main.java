@@ -12,8 +12,8 @@ public class Main {
             Playing with rightmost set bits of a number
          */
 
-        // 3.  Computing parity of a number -> Parity means no. of set bits
-        int n = 15 ;
+        // Brian Kernighan’s Algorithm to count set bits in an integer
+        int n = -1 ;
         int cnt = 0 ;
 
         while (n != 0){
@@ -21,6 +21,6 @@ public class Main {
             n = n & n-1 ;
             cnt++;
         }
-        System.out.println(cnt);
+        System.out.println(cnt); // 32
     }
 }

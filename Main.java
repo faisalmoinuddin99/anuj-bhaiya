@@ -25,10 +25,12 @@ public class Main {
         5 --> 101
 
          */
-        int a[] = countBits(2) ;
+//        int a[] = countBits(2) ;
+        int a[] = approach2(5) ;
         for(int x : a){
             System.out.print(x + " ");
         }
+
     }
 
     public static  int[] countBits(int n) {
@@ -47,5 +49,15 @@ public class Main {
         return a ;
 //        return list.stream().mapToInt(i->i).toArray() ;
     }
+    public static int[] approach2(int n){
+        int t[] = new int[n+1] ;
 
+        t[0] = 0 ;
+        for (int i = 1 ; i<=n; i++){
+
+            t[i] = t[i/2] + i % 2;
+
+        }
+        return t ;
+    }
 }

@@ -1,43 +1,51 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
         /*
-         LeetCode: Power of Two
+         LeetCode: Counting Bits
 
-            Input: n = 1
-            Output: true
-            Explanation: 20 = 1
+        Input: n = 2
+        Output: [0,1,1]
+        Explanation:
+        0 --> 0
+        1 --> 1
+        2 --> 10
 
-            Input: n = 16
-            Output: true
-            Explanation: 24 = 16
+        Input: n = 5
+        Output: [0,1,1,2,1,2]
+        Explanation:
+        0 --> 0
+        1 --> 1
+        2 --> 10
+        3 --> 11
+        4 --> 100
+        5 --> 101
 
-            Input: n = 3
-            Output: false
          */
-
-        int n = -2147483648 ;
-        if(isPowerOfTwo(n)){
-            System.out.println("Yes");
-        }else{
-            System.out.println("No");
+        int a[] = countBits(2) ;
+        for(int x : a){
+            System.out.print(x + " ");
         }
-
     }
 
+    public static  int[] countBits(int n) {
+//        List<Integer> list = new ArrayList<>() ;
+        int a[] = new int[n+1] ;
+        for(int i = 0 ; i <= n; i++){
+                a[i]  = i ;
+                int cnt = 0 ;
+                while (a[i] != 0){
+                    a[i] = a[i] & a[i] - 1 ;
+                    cnt++ ;
+                }
+            a[i] = cnt ;
 
-    public static boolean isPowerOfTwo(int n) {
-        return (n > 0) && (n & (n-1)) == 0 ;
+        }
+        return a ;
+//        return list.stream().mapToInt(i->i).toArray() ;
     }
+
 }
-
-/*
-
-
- */

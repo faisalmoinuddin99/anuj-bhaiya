@@ -9,25 +9,27 @@ public class Main {
     public static void main(String[] args) {
         /*
             Important Properties:
-          Bit Hacks – Part 5 (Find the absolute value of an integer without branching)
+            Round up to the next highest power of 2
+
+            Input:  n = 20
+            Output: 32
+
+            Input:  n = 16
+            Output: 16
          */
-        int n = -18 ;
-        int mask = Integer.SIZE * 8 - 1  ;
-        int abs = (n + mask) ^ mask ;
-        System.out.println("abs(" + n +")= " + abs);
-
-        System.out.println("Integer size: "+Integer.SIZE);
-        System.out.println("Long size: "+Long.SIZE);
 
 
+        int n = 127 ;
+        int nextPowerOf2 = findNextPowerOf2(n) ;
+        System.out.println(nextPowerOf2);
+    }
+    public static int findNextPowerOf2(int n){
+        n = n - 1;
+        while((n & (n - 1)) != 0){
+            n = n & n - 1;
+        }
+        return n << 1 ;
     }
 
+
 }
-
-/*
-OUTPUT:
-abs(-18)= 18
-Integer size: 32
-Long size: 64
-
- */

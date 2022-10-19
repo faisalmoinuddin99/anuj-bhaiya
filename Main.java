@@ -8,26 +8,32 @@ import static java.util.Arrays.stream;
 public class Main {
     public static void main(String[] args) {
         /*
-            Important Properties:
-         Part 6 (Find the total number of bits needed to be flipped)
+         LeetCode: Power of Two
+
+            Input: n = 1
+            Output: true
+            Explanation: 20 = 1
+
+            Input: n = 16
+            Output: true
+            Explanation: 24 = 16
+
+            Input: n = 3
+            Output: false
          */
-        int ans = minBitFlips(65,80) ;
-        System.out.println(ans);
+
+        int n = -2147483648 ;
+        if(isPowerOfTwo(n)){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
 
     }
 
-    public static int minBitFlips(int start, int goal) {
 
-        int XOR = start ^ goal ;
-
-      // using Brain Keringhan Algorithm
-        int cnt = 0 ;
-        while (XOR != 0) {
-
-            XOR = XOR & (XOR - 1) ;
-            cnt++ ;
-        }
-        return cnt ;
+    public static boolean isPowerOfTwo(int n) {
+        return (n > 0) && (n & (n-1)) == 0 ;
     }
 }
 

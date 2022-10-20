@@ -1,49 +1,64 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-            Important Properties:
-            Round up to the previous power of 2
+    /*
+        arr[] = {1, 2, 3, 2, 1, 4}
+        Output:
+        3 4
+        Explanation:
+        3 and 4 occur exactly once.
 
-            Input:  n = 20
-            Output: 16
-
-            Input:  n = 16
-            Output: 16
-         */
-
-
-        int n = 127 ;
-        int nextPowerOf2 = findNextPowerOf2(n) ;
-        System.out.println(nextPowerOf2);
-        int previousPowerOf2 = findPreviousPowerOf2(n) ;
-        System.out.println(previousPowerOf2);
-    }
-    public static int findNextPowerOf2(int n){
-        n = n - 1;
-        while((n & (n - 1)) != 0){
-            n = n & n - 1;
-        }
-        return n << 1 ;
+     */
+        int arr[] = {14,20,21,2,3,2,21,14};
+        int res[] = singleNumber(arr);
+      for (int x: res){
+          System.out.println(x);
+      }
+      int ans = firstNonRepeating(arr) ;
+//        System.out.println(ans);
     }
 
-    public static int findPreviousPowerOf2(int n){
-        while((n & (n-1))!=0){
-            // this line make sures only 1 bit is left
-            n = n & n - 1;
+    public static int[] singleNumber(int[] nums) {
+        // Code here
+        int result = 0;
+        for (int i = 0; i < nums.length; i++) {
+            result = result ^ nums[i];
         }
-        return n ;
+
+        // Now check the position of right most set bit / find the differ bit
+        result = (result & (-result));
+        ArrayList<Integer> a = new ArrayList<>() ;
+
+        // split the array on basis of right most set bit / differ bits
+        int xor1 = 0 ;
+        int xor2 = 0 ;
+
+        for (int i = 0; i < nums.length; i++){
+            if ((nums[i] & result) > 0){
+                xor1 = xor1 ^ nums[i] ;
+
+            }else {
+                xor2 = xor2 ^ nums[i] ;
+
+            }
+        }
+        a.add(xor1) ;
+        a.add(xor2) ;
+
+        Collections.sort(a);
+
+
+        return a.stream().mapToInt(i->i).toArray() ;
+    }
+    public static int firstNonRepeating(int[] a){
+        int result = 0 ;
+        for (int i = 0; i < a.length; i++){
+            result = result ^ a[i] ;
+        }
+        return result ;
     }
 }
 
-/*
-let n = 127
-Next power of 2    : 128
-Previous Power of 2: 64
- */

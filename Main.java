@@ -4,40 +4,71 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        /* Binary Exponentiation
-        Time complexity - O(log(b))
-         */
+        // 2D-Array
 
-        int approach1 = powerItr(5,2) ;
-        System.out.println(approach1);
+        Scanner sc = new Scanner(System.in) ;
+        int row = sc.nextInt() ;
+        int col = sc.nextInt() ;
 
-        int approach2 = powerRec(5,2) ;
-        System.out.println(approach2);
+        // declaration
+        int [][] matrix1 = new int[row][col] ;
 
-    }
-    // iterative approach
-    public static int powerItr(int a, int n){
-        int ans = 1 ;
-        while(n > 0){
-            if((n & 1) == 1){
-                ans = ans * a ;
+        // control rows
+        for(int i = 0 ; i<row; i++){
+            // control col
+            for(int j = 0 ; j < col; j++){
+                matrix1[i][j] = sc.nextInt();
             }
-            n = n >> 1 ;
-            a = a * a;
         }
-        return ans ;
-    }
 
-    // recursive approach
-    public static int powerRec(int a, int n){
-        if(n == 0){
-            return 1 ;
+        // output
+
+        for(int i = 0 ; i < row; i++){
+
+            for(int j = 0 ; j < col ; j++){
+                System.out.print(matrix1[i][j] + " ");
+            }
+            System.out.println();
         }
-        int x = powerRec(a, n / 2);
-        if(n % 2 == 0){
-            return x * x ;
-        }else{
-            return a * x * x ;
+
+        System.out.println("which number you want to search: ");
+        int searchElement = sc.nextInt() ;
+        boolean flag = false ;
+        for (int i = 0 ; i < row; i++){
+            for(int j = 0 ; j < col; j++){
+                if(matrix1[i][j] == searchElement){
+                    flag = true ;
+                    System.out.println("("+i+","+j+")");
+                }
+            }
+        }
+        if (flag == false){
+            System.out.println("element not found");
         }
     }
 }
+
+/*
+CASE1:
+2
+3
+1 2 3
+3 2 1
+1 2 3
+3 2 1
+which number you want to search:
+6
+element not found
+
+CASE2:
+2
+3
+1 2 3
+3 2 1
+1 2 3
+3 2 1
+which number you want to search:
+1
+(0,0)
+(1,2)
+ */

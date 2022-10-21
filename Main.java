@@ -4,30 +4,40 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-            Find position of set bit
+        /* Binary Exponentiation
+        Time complexity - O(log(b))
          */
-        int ans = findPosition(1) ;
-        System.out.println(ans);
+
+        int approach1 = powerItr(5,2) ;
+        System.out.println(approach1);
+
+        int approach2 = powerRec(5,2) ;
+        System.out.println(approach2);
+
+    }
+    // iterative approach
+    public static int powerItr(int a, int n){
+        int ans = 1 ;
+        while(n > 0){
+            if((n & 1) == 1){
+                ans = ans * a ;
+            }
+            n = n >> 1 ;
+            a = a * a;
+        }
+        return ans ;
     }
 
-   public static int findPosition(int N) {
-        // code here
-       int cnt = 0 ;
-       if (!isPowerOf2(N)){
-           return -1 ;
-       }else{
-           while(N != 0){
-               if((N & 1) == 1){
-                   break ;
-               }
-               cnt++ ;
-               N = N >> 1 ;
-           }
-       }
-       return cnt + 1;
-    }
-    public static boolean isPowerOf2(int n){
-        return n > 0 && (n & (n-1)) == 0 ;
+    // recursive approach
+    public static int powerRec(int a, int n){
+        if(n == 0){
+            return 1 ;
+        }
+        int x = powerRec(a, n / 2);
+        if(n % 2 == 0){
+            return x * x ;
+        }else{
+            return a * x * x ;
+        }
     }
 }

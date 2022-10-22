@@ -4,71 +4,37 @@ import static java.util.Arrays.stream;
 
 public class Main {
     public static void main(String[] args) {
-        // 2D-Array
+        // Co-ordinate geometry
 
-        Scanner sc = new Scanner(System.in) ;
-        int row = sc.nextInt() ;
-        int col = sc.nextInt() ;
+        // Distance between 2 points
 
-        // declaration
-        int [][] matrix1 = new int[row][col] ;
+        int A[] = {1,2} ;
+        int B[] = {2,3} ;
 
-        // control rows
-        for(int i = 0 ; i<row; i++){
-            // control col
-            for(int j = 0 ; j < col; j++){
-                matrix1[i][j] = sc.nextInt();
-            }
-        }
+        int Ax,Ay;
 
-        // output
+        Ax = A[0] ;
+        Ay = A[1] ;
 
-        for(int i = 0 ; i < row; i++){
+        int Bx, By ;
+        Bx = B[0] ;
+        By = B[1] ;
 
-            for(int j = 0 ; j < col ; j++){
-                System.out.print(matrix1[i][j] + " ");
-            }
-            System.out.println();
-        }
+        System.out.println("A(X,Y): " + "A("+Ax+","+Ay+")");
+        System.out.println("B(X,Y): " + "B("+Bx+","+By+")");
 
-        System.out.println("which number you want to search: ");
-        int searchElement = sc.nextInt() ;
-        boolean flag = false ;
-        for (int i = 0 ; i < row; i++){
-            for(int j = 0 ; j < col; j++){
-                if(matrix1[i][j] == searchElement){
-                    flag = true ;
-                    System.out.println("("+i+","+j+")");
-                }
-            }
-        }
-        if (flag == false){
-            System.out.println("element not found");
-        }
+        // calculate the distance b/w Point A and Point B
+
+        int x = Ax - Bx ;
+        int y = Ay - By ;
+
+        double AB = Math.sqrt(Math.pow(x,2) + Math.pow(y,2) ) ;
+        System.out.println("Distance between Point A and B is: "+AB);
     }
+
+
 }
 
 /*
-CASE1:
-2
-3
-1 2 3
-3 2 1
-1 2 3
-3 2 1
-which number you want to search:
-6
-element not found
 
-CASE2:
-2
-3
-1 2 3
-3 2 1
-1 2 3
-3 2 1
-which number you want to search:
-1
-(0,0)
-(1,2)
  */

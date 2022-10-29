@@ -4,33 +4,25 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
+        String s1 = "abcd" ;
+        String s2 = "dabc" ;
 
-        String s1 = "good";
-        String s2 = "oodg";
-
-        boolean ans = isPermutated(s1, s2);
-        System.out.println(ans);
+        boolean check = isPermutatedUsingXOR(s1,s2) ;
+        System.out.println(check);
 
     }
+    public static boolean isPermutatedUsingXOR(String s1, String s2){
 
-    public static boolean isPermutated(String s1, String s2) {
-        // hash map
-        HashMap<Character, Integer> dict = new HashMap<>();
-        boolean ans = false;
-        for (int i = 0; i < s1.length(); i++) {
-            dict.put(s1.charAt(i), i + 1);
+        String s3 =  s1.concat(s2) ;
+
+        int result = 0 ;
+
+        for (int i = 0 ; i < s3.length(); i++){
+            result = result ^ s3.charAt(i) ;
         }
-        for (int i = 0; i < s2.length(); i++) {
-            if (dict.containsKey(s2.charAt(i))) {
-                dict.remove(s2.charAt(i));
-            }
+        if (result != 0){
+            return false ;
         }
-        if (!dict.isEmpty()) {
-            return ans;
-        }
-        return true;
+        return true ;
     }
 }
-/*
-true
- */

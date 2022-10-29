@@ -1,38 +1,36 @@
+import java.util.HashMap;
+
+
 public class Main {
     public static void main(String[] args) {
 
-        String s1 = "cat" ;
-        String s2 = "act" ;
 
-       boolean result =  isPermutated(s1,s2);
-        System.out.println(result);
+        String s1 = "good";
+        String s2 = "oodg";
+
+        boolean ans = isPermutated(s1, s2);
+        System.out.println(ans);
+
     }
+
     public static boolean isPermutated(String s1, String s2) {
-        boolean[] flag = new boolean[s1.length()] ;
-
-        for (int i = 0 ; i < s1.length(); i++){
-            for(int j = 0 ; j < s2.length(); j++){
-                if(s1.charAt(i) == s2.charAt(j)){
-                    flag[i] = true ;
-                    break ;
-                }
+        // hash map
+        HashMap<Character, Integer> dict = new HashMap<>();
+        boolean ans = false;
+        for (int i = 0; i < s1.length(); i++) {
+            dict.put(s1.charAt(i), i + 1);
+        }
+        for (int i = 0; i < s2.length(); i++) {
+            if (dict.containsKey(s2.charAt(i))) {
+                dict.remove(s2.charAt(i));
             }
         }
-
-        if (!checkBooleanArray(flag)){
-            return false ;
+        if (!dict.isEmpty()) {
+            return ans;
         }
-        return true ;
-    }
-
-    public static boolean checkBooleanArray(boolean[] a){
-       boolean tracker = true ;
-        for (int i = 0 ; i<a.length; i++){
-            if (a[i] == false){
-                tracker = false ;
-                break ;
-            }
-        }
-        return tracker ;
+        return true;
     }
 }
+/*
+true
+ */

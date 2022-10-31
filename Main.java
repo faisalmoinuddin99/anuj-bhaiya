@@ -3,26 +3,19 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-       int a[] = {2,3,1,2,3} ;
-       int res = findDuplicate(a) ;
-        System.out.println(res);
-    }
-    public static int findDuplicate(int [] a){
-      // using tortoise and hare algorithm
-        int tortoise = a[0] ;
-        int hare = a[0] ;
 
-        do{
-            tortoise = a[tortoise] ;
-            hare = a[a[hare]] ;
-        }while (tortoise != hare) ;
+        int a[] = {0,1,1,0,2,1,2,0,0,0,1} ;
 
-        hare = a[0] ;
-        while (tortoise != hare){
-            tortoise = a[tortoise] ;
-            hare = a[hare] ;
+        Arrays.sort(a);
+        for (int i : a){
+            System.out.print(i + " ");
         }
-        return hare ;
     }
-
 }
+/*
+Approach 1: Sorting method
+TC: O(nlogn)
+SC: O(1)
+
+0 0 0 0 0 1 1 1 1 2 2
+ */

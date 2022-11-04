@@ -16,35 +16,36 @@ public class Main {
 
         int rows = matrix.length;
         int col = matrix[0].length;
+        // Optimal approach with constant space... improved version of better solution
 
-        boolean dummyRows[] = new boolean[rows];
-        boolean dummyCols[] = new boolean[col];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < col; j++) {
-                if (matrix[i][j] == 0) {
-                    dummyRows[i] = true;
-                    dummyCols[j] = true;
+        boolean firstCol = false ;
+        for (int i = 0 ; i < rows; i++){
+            if (matrix[i][0] == 0) firstCol = true ;
+            for (int j = 1; j < col; j++){
+                if (matrix[i][j] == 0){
+                    matrix[i][0] = 0 ;
+                    matrix[0][j] = 0 ;
                 }
             }
         }
 
-        // trace backword
-        for (int i = rows - 1; i >= 0; i--) {
-            for (int j = col - 1; j >= 0; j--) {
-                if (dummyRows[i] || dummyCols[j]) {
-                    matrix[i][j] = 0;
+        // fill-up the 0 in backward direction
+            for (int i = rows - 1 ; i>= 0 ; i--){
+                for (int j = col - 1; j >= 1; j-- ){
+                    if (matrix[i][0] == 0 || matrix[0][j] == 0){
+                        matrix[i][j] = 0 ;
+                    }
+                }
+                if (firstCol){
+                    matrix[i][0] = 0 ;
                 }
             }
-
-        }
-        for (int i[] : matrix){
-            for (int j : i){
-                System.out.print(j+ " ");
+            for (int i[] : matrix){
+                for (int j: i){
+                    System.out.print(j + " ");
+                }
+                System.out.println();
             }
-            System.out.println();
-        }
-
     }
 }
 

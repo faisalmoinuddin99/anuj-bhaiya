@@ -1,0 +1,39 @@
+   public void setZeroes(int[][] matrix) {
+    
+    
+        // 1. cal row and col of 2d array
+        int row = matrix.length ;
+        int col = matrix[0].length ;
+        
+        /* 2. now iterate over 2d matrix and check is ther 0 present, if present leave 0 as it is
+        and make corresponding rows and col as -1
+        */
+        for(int i = 0 ; i < row; i++){
+            for(int j = 0 ; j < col; j++){
+                if(matrix[i][j] == 0){
+                    // 3. set to -1, for this u need loop
+                    for(int k = 0; k < row; k++){
+                        // except 0 baki sub ko -1 kr de
+                        if(matrix[k][j] != 0){
+                            // sare row ko -1 kr dega ye
+                            matrix[k][j] = -1 ;
+                        }
+                    }
+                    for(int k = 0 ; k < col; k++){
+                        if(matrix[i][k] != 0){
+                            matrix[i][k] = -1 ;
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        // 4. now convert -1 to 0
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                if(matrix[i][j] == -1){
+                    matrix[i][j] = 0 ;
+                }
+            }
+        }

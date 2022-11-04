@@ -6,44 +6,51 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] interval1 = {1, 3};
-        int[] interval2 = {2,6};
-        int[] interval3 = {8,10};
-        int[] interval4 = {15,18};
-//        int[] interval5 = {2, 6};
-//[1,3],[2,6],[8,10],[15,18]
-        int[][] intervals = {interval1, interval2, interval3, interval4};
+        int[] interval1 = {0,1,2,0};
+        int[] interval2 = {3,4,5,2};
+        int[] interval3 = {1,3,1,5};
 
-        int [][] ans = merge(intervals) ;
-        for (int []i :ans){
-            for (int j : i){
-                System.out.print(j);
-            }
-        }
-    }
-
-    public static int[][] merge(int[][] intervals) {
+        int[][] intervals = {interval1, interval2, interval3};
 
 
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+        int rows = intervals.length;
+        int col = intervals[0].length;
 
-        ArrayList<int[]> list = new ArrayList<>();
 
-        for (int[] interval : intervals) {
-            if (list.isEmpty()) {
-                list.add(interval);
-            } else {
-                int prevInterval[] = list.get(list.size() - 1);
-                if (interval[0] < prevInterval[1]) {
-                    // overlapping
-                    prevInterval[1] = Math.max(prevInterval[1], interval[1]);
-                } else {
-                    list.add(interval);
+        for (int i = 0 ; i < rows; i++){
+            for (int j =0 ; j < col; j++){
+                if (intervals[i][j] == 0){
+                    // set -1
+                    for (int k = 0; k < rows; k++){
+                        if (intervals[k][j] != 0){
+                            intervals[k][j] =  -1;
+                        }
+
+                    }
+                    for (int k = 0 ; k < col; k++){
+                            if (intervals[i][k] != 0){
+                                intervals[i][k] = -1 ;
+                            }
+
+
+                    }
                 }
             }
         }
-        return list.toArray(new int[list.size()][]) ;
+        // replace -1 to 0
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < col; j++){
+                if (intervals[i][j] == -1){
+                    // set back to 0
+                    intervals[i][j] = 0 ;
+                }
+            }
+        }
     }
 }
 
-// [[1,6][8,10],[15,18]]
+/*
+0 0 0 0
+0 4 5 0
+0 3 1 0
+ */

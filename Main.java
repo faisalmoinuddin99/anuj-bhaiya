@@ -6,46 +6,45 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] interval1 = {0,1,2,0};
-        int[] interval2 = {3,4,5,2};
-        int[] interval3 = {1,3,1,5};
+        int[] interval1 = {0, 1, 2, 0};
+        int[] interval2 = {3, 4, 5, 2};
+        int[] interval3 = {1, 3, 1, 5};
+//        int[] interval4 = {0,0,0,1};
 
-        int[][] intervals = {interval1, interval2, interval3};
-
-
-        int rows = intervals.length;
-        int col = intervals[0].length;
+        int[][] matrix = {interval1, interval2, interval3};
 
 
-        for (int i = 0 ; i < rows; i++){
-            for (int j =0 ; j < col; j++){
-                if (intervals[i][j] == 0){
-                    // set -1
-                    for (int k = 0; k < rows; k++){
-                        if (intervals[k][j] != 0){
-                            intervals[k][j] =  -1;
-                        }
+        int rows = matrix.length;
+        int col = matrix[0].length;
 
-                    }
-                    for (int k = 0 ; k < col; k++){
-                            if (intervals[i][k] != 0){
-                                intervals[i][k] = -1 ;
-                            }
+        boolean dummyRows[] = new boolean[rows];
+        boolean dummyCols[] = new boolean[col];
 
-
-                    }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == 0) {
+                    dummyRows[i] = true;
+                    dummyCols[j] = true;
                 }
             }
         }
-        // replace -1 to 0
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < col; j++){
-                if (intervals[i][j] == -1){
-                    // set back to 0
-                    intervals[i][j] = 0 ;
+
+        // trace backword
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = col - 1; j >= 0; j--) {
+                if (dummyRows[i] || dummyCols[j]) {
+                    matrix[i][j] = 0;
                 }
             }
+
         }
+        for (int i[] : matrix){
+            for (int j : i){
+                System.out.print(j+ " ");
+            }
+            System.out.println();
+        }
+
     }
 }
 

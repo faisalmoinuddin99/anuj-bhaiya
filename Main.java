@@ -6,51 +6,49 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] interval1 = {0, 1, 2, 0};
-        int[] interval2 = {3, 4, 5, 2};
-        int[] interval3 = {1, 3, 1, 5};
-//        int[] interval4 = {0,0,0,1};
-
-        int[][] matrix = {interval1, interval2, interval3};
+      // pascal triangle
+       trianglePattern(5);
 
 
-        int rows = matrix.length;
-        int col = matrix[0].length;
-        // Optimal approach with constant space... improved version of better solution
 
-        boolean firstCol = false ;
-        for (int i = 0 ; i < rows; i++){
-            if (matrix[i][0] == 0) firstCol = true ;
-            for (int j = 1; j < col; j++){
-                if (matrix[i][j] == 0){
-                    matrix[i][0] = 0 ;
-                    matrix[0][j] = 0 ;
+    }
+    public static void trianglePattern(int line){
+        int i, j, r;
+        boolean k = true ;
+
+        for (i = 1; i <= line; i++){
+            r = 0 ;
+            for (j = 1; j <= 2 * line -1; j++){
+                if (j>=line+1-i && j <= line-1+i && k){
+                    System.out.printf("%2d",combination(i - 1, r));
+                    r++ ;
+                    k = false ;
+                }else{
+                    System.out.print("  ");
+                    k = true ;
                 }
             }
+            System.out.println();
         }
 
-        // fill-up the 0 in backward direction
-            for (int i = rows - 1 ; i>= 0 ; i--){
-                for (int j = col - 1; j >= 1; j-- ){
-                    if (matrix[i][0] == 0 || matrix[0][j] == 0){
-                        matrix[i][j] = 0 ;
-                    }
-                }
-                if (firstCol){
-                    matrix[i][0] = 0 ;
-                }
-            }
-            for (int i[] : matrix){
-                for (int j: i){
-                    System.out.print(j + " ");
-                }
-                System.out.println();
-            }
     }
+    public static int factorial(int n){
+        if (n ==  0){
+            return 1 ;
+        }
+        return n * factorial(n-1) ;
+    }
+    public static int combination(int n, int r){
+//        nCr = n! / (n - r) ! * r!
+        return (factorial(n) / (factorial( n - r) * factorial(r))) ;
+    }
+
 }
 
 /*
-0 0 0 0
-0 4 5 0
-0 3 1 0
+         1
+       1   1
+     1   2   1
+   1   3   3   1
+ 1   4   6   4   1
  */

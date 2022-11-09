@@ -1,46 +1,32 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        int a[] = {8, 4, 2, 1};
-        for (int i: a){
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        divide(a, 0, a.length - 1);
-        for (int i: a){
-            System.out.print(i + " ");
-        }
-
+        /* Best Time to Buy and Sell Stock */
+        int[] a = {7,6,4,3,1};
+        bruteForce(a);
     }
 
-    public static void divide(int[] A, int low, int high) {
-        if (low < high) {
-            int mid = low + (high - low) / 2;
-            divide(A, low, mid);
-            divide(A, mid + 1, high);
-            conqure(A, low, mid, high);
-        }
-    }
+    public static void bruteForce(int[] a) {
 
-    public static void conqure(int[] A, int low, int mid, int high) {
-        int i = low;
-        int j = mid + 1;
-        int x = 0;
-        int b[] = new int[high - low + 1];
-        while ((i <= mid) && (j <= high)) {
-            if (A[i] <= A[j]) {
-                b[x++] = A[i++];
-            } else {
-                b[x++] = A[j++];
+        List<Integer> list = new ArrayList( );
+        int difference = 0;
+        int x = 0 ;
+        int maxProfit = 0 ;
+        for (int i = 0; i < a.length; i++) {
+
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] < a[j]) {
+                    difference = Math.abs(a[j] - a[i]) ;
+                    list.add(difference) ;
+                }
+              if (!list.isEmpty()){
+                  maxProfit = (int) Collections.max(list) ;
+              }
             }
+
         }
-        while (i <= mid) {
-            b[x++] = A[i++];
-        }
-        while (j <= high) {
-            b[x++] = A[j++];
-        }
-        for(int ii = 0, jj = low; ii < b.length; ii++,jj++){
-            A[jj] = b[ii] ;
-        }
+        System.out.println(maxProfit);
     }
+
 }

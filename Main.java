@@ -14,20 +14,26 @@ public class Main {
 
         int row = matrix.length;
         int col = matrix[0].length;
-        int target = 13 ;
-        boolean ans = false ;
-        for (int i = 0 ; i < row; i++){
-            for (int j = 0; j < col; j++){
-                if (matrix[i][j] == target){
-                    ans = true ;
-                    break ;
-                }
+        int target = 34 ;
+
+        int i = 0 ;
+        int j = col - 1 ;
+
+        while (i < row && j>= 0){
+            if (matrix[i][j] == target){
+                System.out.println("found at index " + i + " " + j);
+            }
+            if (matrix[i][j] > target){
+                // move j towards left
+                j-- ;
+            }else {
+                // move to below row
+                i++ ;
             }
         }
-        System.out.println(ans);
     }
 }
 
 /*
-false
+found at index 2 2
  */

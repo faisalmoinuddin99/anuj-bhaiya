@@ -2,38 +2,29 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-            Transpose of a Matrix
-         */
-        int[] a = {1,3,5,7};
-        int[] b = {10,11,16,20};
-        int[] c = {23,30,34,50};
 
+        // Binary search Algorithm
+        int a[] = {4,5,6,10,11} ;
+        int ans = binarySearch(a,5) ;
+        System.out.println(ans);
+    }
 
-        int[][] matrix = {a, b, c};
+    public static int binarySearch(int[] a, int target){
+        int start = 0 ;
+        int end = a.length - 1;
+        int mid = 0 ;
+        while (start <= end){
+             mid = start + ((end - start) / 2);
 
-        int row = matrix.length;
-        int col = matrix[0].length;
-        int target = 34 ;
-
-        int i = 0 ;
-        int j = col - 1 ;
-
-        while (i < row && j>= 0){
-            if (matrix[i][j] == target){
-                System.out.println("found at index " + i + " " + j);
+            if (a[mid] == target){
+                return mid ;
             }
-            if (matrix[i][j] > target){
-                // move j towards left
-                j-- ;
+            if (target < a[mid]){
+                end = mid - 1 ;
             }else {
-                // move to below row
-                i++ ;
+                start = mid + 1 ;
             }
         }
+        return -1 ;
     }
 }
-
-/*
-found at index 2 2
- */

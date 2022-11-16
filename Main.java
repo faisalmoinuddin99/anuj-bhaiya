@@ -5,33 +5,30 @@ public class Main {
 
 
     public static void main(String[] args) {
-        // Searching in a Nearly Sorted Array
-        int a[] = {5,10,30,20,40} ;
-        int ans = modifiedBinarySearch(a,30) ;
+        // find the floor of an element in a sorted array
+        int a[] = {1,2,3,4,8,10,10,12} ;
+        int ans = floorOfAnElementInASortedArray(a,12) ;
         System.out.println(ans);
     }
 
-    public static int modifiedBinarySearch(int[] a, int x){
+    public static int floorOfAnElementInASortedArray(int [] a, int target){
         int start = 0 ;
         int end = a.length - 1 ;
-
+        int resFloor = -1 ;
         while (start <= end){
             int mid = start + (end - start) / 2 ;
-            if (x == a[mid]){
+
+            if (a[mid] == target){
                 return mid ;
             }
-            if (mid - 1 >= start && a[mid - 1] == x){
-                return mid - 1;
-            }
-            if (mid + 1 <= end && a[mid + 1 ] == x){
-                return  mid + 1 ;
-            }
-            else if(a[mid] <= x){
-                start = mid + 2 ;
+            else if(a[mid] <= target){
+                resFloor = a[mid] ;
+                start = mid + 1 ;
             }else {
-                end = mid - 2 ;
+                end = mid - 1 ;
             }
         }
-        return -1 ;
+        return resFloor ;
     }
+
 }

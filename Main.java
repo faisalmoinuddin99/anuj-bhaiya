@@ -1,58 +1,47 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Main {
 
 
     public static void main(String[] args) {
-        // find the floor of an element in a sorted array
-        int a[] = {1,2,3,4,8,10,10,12} ;
-        int ans1 = floorOfAnElementInASortedArray(a,5) ;
-        int ans2 = ceilOfAnElementInASortedArray(a,5) ;
-        System.out.println("Floor: " + ans1 + " Ceil: " + ans2);
+        // Next largest element
+        int a[] = {1,3,4,2} ;
+        List<Integer> ll = nextLargestElement(a,a.length) ;
+        for (int i : ll){
+            System.out.print(i + " ");
+        }
     }
 
-    public static int floorOfAnElementInASortedArray(int [] a, int target){
-        int start = 0 ;
-        int end = a.length - 1 ;
-        int resFloor = -1 ;
-        while (start <= end){
-            int mid = start + (end - start) / 2 ;
+    public static List<Integer> nextLargestElement(int[]a, int n){
 
-            if (a[mid] == target){
-                return mid ;
-            }
-            else if(a[mid] <= target){
-                resFloor = a[mid] ;
-                start = mid + 1 ;
-            }else {
-                end = mid - 1 ;
-            }
-        }
-        return resFloor ;
-    }
-    public static int ceilOfAnElementInASortedArray(int [] a, int target){
-        int start = 0 ;
-        int end = a.length - 1 ;
+        List<Integer> list = new ArrayList<>() ;
+        Stack<Integer> s = new Stack<>() ;
 
-        int ceilRes = -1 ;
-        while (start <= end){
-            int mid = start + (end - start) / 2 ;
-
-            if (a[mid] == target){
-                return mid ;
-            }
-            else if(a[mid] > target){
-                ceilRes = a[mid] ;
-                end = mid - 1 ;
-            }else {
-                start = mid + 1 ;
-            }
-        }
-        return ceilRes ;
+       for (int i = n - 1; i >= 0; i--){
+           if (s.empty()){
+               list.add(-1) ;
+           }
+            else if(!s.empty() && a[i] < s.peek()){
+                list.add(s.peek()) ;
+           }
+            else if(!s.empty() && a[i] > s.peek()){
+                while (s.size() > 0 && s.peek() <= a[i]){
+                    s.pop() ;
+                }
+                if (s.isEmpty()){
+                    list.add(-1) ;
+                }else {
+                    list.add(s.peek()) ;
+                }
+           }
+           s.push(a[i]) ;
+       }
+        return list ;
     }
 }
 
 /*
-Floor: 4 Ceil: 8
+-1 -1 4 3
  */

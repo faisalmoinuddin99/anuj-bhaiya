@@ -12,14 +12,51 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        int[] a = {5,5,1,7,1,1,5,2,7,6} ;
-        int n = a.length ;
+       int[][] matrix = {
+               {0,1,1,0},
+               {1,1,1,1},
+               {1,1,1,1},
+               {1,1,0,0} ,
+       } ;
+       int a[] = {4,0,0,3} ;
+       int max = MAH(a, a.length) ;
+        System.out.println("Testing : "+max);
+      int maxLengthOfRectangleInBinaryMatrix =  MABMatrix(matrix) ;
 
-      int maxLengthOfHistogram =  getMaxArea(a,n) ;
-        System.out.println();
-        System.out.println("Max height: " + maxLengthOfHistogram);
+//
+        System.out.println("Max Area of Rectangle in Binary Matrix: " + maxLengthOfRectangleInBinaryMatrix);
     }
-    public static int getMaxArea(int[] arr, int size){
+
+    public static int MABMatrix(int[][] a){
+        int row = a.length;
+        int col = a[0].length ;
+        int[] vector = new int[col] ;
+        int max = 0 ;
+        for (int i = 0; i< col; i++){
+            vector[i] = a[0][i] ;
+        }
+        max = Math.max(max, MAH(vector, row)) ;
+
+        for (int i = 1 ; i < row; i++){
+            for (int j = 0; j < col; j++){
+               if (a[i][j] == 0){
+                   vector[j] = 0 ;
+               }else {
+                   vector[j] = vector[j] + a[i][j] ;
+               }
+            }
+
+           max = Math.max(max,MAH(vector,row)) ;
+            for (int k : vector){
+                System.out.print(k + " " ); // 0 1 1 0
+            }
+
+            System.out.println();
+        }
+
+        return max;
+    }
+    public static int MAH(int[] arr, int size){
         int width[] = new int[size] ;
         int right[] = new int[size] ;
         int left [] = new int[size] ;
@@ -30,14 +67,14 @@ public class Main {
             width[i] = right[i] - left[i] - 1 ;
             height[i] = arr[i] * width[i] ;
         }
-        System.out.println("width: ");
-        for (int i: width){
-            System.out.print(i + " ");
-        }
-        System.out.println("Height: ");
-        for (int i: height){
-            System.out.print(i + " ");
-        }
+//        System.out.println("width: ");
+//        for (int i: width){
+//            System.out.print(i + " ");
+//        }
+//        System.out.println("Height: ");
+//        for (int i: height){
+//            System.out.print(i + " ");
+//        }
 
         return Arrays.stream(height).max().getAsInt() ;
     }
@@ -61,10 +98,10 @@ public class Main {
             }
             stack.push(new Pair(a[i],i)) ;
         }
-        System.out.print("Smallest element to Right: ");
-        for (int i : right){
-            System.out.print(i + " ");
-        }
+//        System.out.print("Smallest element to Right: ");
+//        for (int i : right){
+//            System.out.print(i + " ");
+//        }
         return right;
     }
     public static int[] NSL(int[] a, int n){
@@ -89,10 +126,10 @@ public class Main {
             }
             stack.push(new Pair(a[i], i)) ;
         }
-        System.out.print("Smallest element to Left: ");
-        for (int i : left){
-            System.out.print(i + " ");
-        }
+//        System.out.print("Smallest element to Left: ");
+//        for (int i : left){
+//            System.out.print(i + " ");
+//        }
         return left ;
     }
 }

@@ -2,143 +2,55 @@ import java.util.*;
 
 public class Main {
 
-    static public class Pair{
-        private int first ;
-        private int second ;
-
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
+    public static Stack<Integer> stack = new Stack<>();
+    public static Stack<Integer> supportStack = new Stack<>();
     public static void main(String[] args) {
-       int[][] matrix = {
-               {0,1,1,0},
-               {1,1,1,1},
-               {1,1,1,1},
-               {1,1,0,0} ,
-       } ;
-       int a[] = {4,0,0,3} ;
-       int max = MAH(a, a.length) ;
-        System.out.println("Testing : "+max);
-      int maxLengthOfRectangleInBinaryMatrix =  MABMatrix(matrix) ;
 
-//
-        System.out.println("Max Area of Rectangle in Binary Matrix: " + maxLengthOfRectangleInBinaryMatrix);
-    }
-
-    public static int MABMatrix(int[][] a){
-        int row = a.length;
-        int col = a[0].length ;
-        int[] vector = new int[col] ;
-        int max = 0 ;
-        for (int i = 0; i< col; i++){
-            vector[i] = a[0][i] ;
+        int[] a = {18,19,29,15,16} ;
+        pushElement(-2);
+        pushElement(0);
+        pushElement(-3);
+       int min = getMin() ;
+        popElement() ;
+        System.out.println(stack.peek());
+        min = getMin() ;
+        System.out.println("Minimum element: "+min);
+        for (int i: stack){
+            System.out.print(i + " ");
         }
-        max = Math.max(max, MAH(vector, row)) ;
-
-        for (int i = 1 ; i < row; i++){
-            for (int j = 0; j < col; j++){
-               if (a[i][j] == 0){
-                   vector[j] = 0 ;
-               }else {
-                   vector[j] = vector[j] + a[i][j] ;
-               }
-            }
-
-           max = Math.max(max,MAH(vector,row)) ;
-            for (int k : vector){
-                System.out.print(k + " " ); // 0 1 1 0
-            }
-
-            System.out.println();
+        System.out.println();
+        for (int i : supportStack){
+            System.out.print(i + " ");
         }
 
-        return max;
     }
-    public static int MAH(int[] arr, int size){
-        int width[] = new int[size] ;
-        int right[] = new int[size] ;
-        int left [] = new int[size] ;
-        int height[] = new int[size] ;
-        right = NSR(arr,size) ;
-        left = NSL(arr,size) ;
-        for (int i = 0; i < size; i++){
-            width[i] = right[i] - left[i] - 1 ;
-            height[i] = arr[i] * width[i] ;
+    public static void pushElement(int x){
+        stack.push(x) ;
+        if (supportStack.empty() || supportStack.peek() >= x){
+            supportStack.push(x) ;
         }
-//        System.out.println("width: ");
-//        for (int i: width){
-//            System.out.print(i + " ");
-//        }
-//        System.out.println("Height: ");
-//        for (int i: height){
-//            System.out.print(i + " ");
-//        }
+    }
 
-        return Arrays.stream(height).max().getAsInt() ;
+    public static int popElement(){
+        int ans = stack.pop() ;
+        if (stack.empty()) return -1 ;
+         if(supportStack.peek() == ans) {
+             supportStack.pop();
+         }
+        return ans;
     }
-    public static int[] NSR(int[] a ,int size){
-        Stack<Pair> stack = new Stack<>() ;
-        int[] right = new int[size] ;
-        for (int i = size - 1; i >= 0 ; i--){
-            if (stack.empty()){
-                right[i] = size ;
-            } else if (!stack.empty() && a[i] > stack.peek().first) {
-                right[i] = stack.peek().second ;
-            } else if (!stack.empty() && a[i] <= stack.peek().first) {
-                while (!stack.empty() && a[i] <= stack.peek().first){
-                    stack.pop() ;
-                }
-                if (stack.empty()){
-                    right[i] = size ;
-                }else {
-                    right[i] = stack.peek().second ;
-                }
-            }
-            stack.push(new Pair(a[i],i)) ;
+
+    public static int getMin() {
+        if (supportStack.empty()){
+            return -1 ;
         }
-//        System.out.print("Smallest element to Right: ");
-//        for (int i : right){
-//            System.out.print(i + " ");
-//        }
-        return right;
+        return supportStack.peek() ;
     }
-    public static int[] NSL(int[] a, int n){
-        Stack<Pair> stack = new Stack<>() ;
-        int[] left = new int[n] ;
-        for (int i = 0 ; i < n; i++){
-            if (stack.empty()){
-                left[i] = -1 ;
-            }
-            else if(!stack.empty() && a[i] > stack.peek().first){
-                    left[i] = stack.peek().second ;
-            }
-            else if (!stack.empty() && a[i] <= stack.peek().first){
-                while (!stack.empty() && a[i] <= stack.peek().first){
-                    stack.pop() ;
-                }
-                if (stack.empty()){
-                    left[i] = -1 ;
-                }else {
-                    left[i] = stack.peek().second ;
-                }
-            }
-            stack.push(new Pair(a[i], i)) ;
-        }
-//        System.out.print("Smallest element to Left: ");
-//        for (int i : left){
-//            System.out.print(i + " ");
-//        }
-        return left ;
-    }
+
 }
 
 /*
-a = {5,5,1,7,1,1,5,2,7,6} ;
-Smallest element to Right Index: 2 2 10 4 10 10 7 10 9 10  here -1 is replaced with = a.length
-The Smallest element to Left Index: -1 -1 -1 2 -1 -1 5 5 7 7
-width: 2 2 10 1 10 10 1 4 1 2
-Height: 10 10 10 7 10 10 5 8 7 12
-Max height: 12
+Minimum element: 1
+18 19 29 16 1
+18 16 1
  */
